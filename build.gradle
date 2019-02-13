@@ -25,10 +25,14 @@ buildscript {
         google()
         jcenter()
     }
-    dependencies {
-        classpath 'com.android.tools.build:gradle:3.3.0-rc02'
-        classpath 'android.arch.navigation:navigation-safe-args-gradle-plugin:1.0.0-alpha07'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+    dependencies { def gradleBuild = "3.3.1"
+        def gradlePlugin = "1.0.0-beta01"
+        def kotlinVn = "1.3.21"
+        classpath "com.android.tools.build:gradle:$gradleBuild"
+        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$gradlePlugin"
+                 //1.0.0-alpha07'
+
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVn"
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
