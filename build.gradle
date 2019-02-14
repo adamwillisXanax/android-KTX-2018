@@ -19,7 +19,7 @@
 buildscript {
 
     ext {
-        kotlinVersion = '1.3.11'
+        kotlinVersion = '1.3.21'
     }
     repositories {
         google()
@@ -30,6 +30,7 @@ buildscript {
         def kotlinVn = "1.3.21"
         classpath "com.android.tools.build:gradle:$gradleBuild"
         classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$gradlePlugin"
+      //  classpath "com.example.android.codelabs.navigation:1.0.0"
                  //1.0.0-alpha07'
 
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVn"

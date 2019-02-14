@@ -24,9 +24,14 @@ import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.onNavDestinationSelected
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 /**
@@ -48,14 +53,14 @@ class MainActivity : AppCompatActivity() {
         // Set up Action Bar
         val navController = host.navController
 
-        appBarConfiguration = AppBarConfiguration(navController.graph)
+      //  appBarConfiguration = AppBarConfiguration(navController.graph)
 
         // TODO STEP 9.5 - Create an AppBarConfiguration with the correct top-level destinations
         // You should also remove the old appBarConfiguration setup above
-//        val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
-//        appBarConfiguration = AppBarConfiguration(
-//                setOf(R.id.home_dest, R.id.deeplink_dest),
-//                drawerLayout)
+     val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
+       appBarConfiguration = AppBarConfiguration(
+              setOf(R.id.home_dest, R.id.deeplink_dest),
+               drawerLayout)
         // TODO END STEP 9.5
 
         setupActionBar(navController, appBarConfiguration)
@@ -79,17 +84,17 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupBottomNavMenu(navController: NavController) {
         // TODO STEP 9.3 - Use NavigationUI to set up Bottom Nav
-//        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
-//        bottomNav?.setupWithNavController(navController)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
+        bottomNav?.setupWithNavController(navController)
         // TODO END STEP 9.3
     }
 
     private fun setupNavigationMenu(navController: NavController) {
         // TODO STEP 9.4 - Use NavigationUI to set up a Navigation View
-//        // In split screen mode, you can drag this view out from the left
-//        // This does NOT modify the actionbar
-//        val sideNavView = findViewById<NavigationView>(R.id.nav_view)
-//        sideNavView?.setupWithNavController(navController)
+       // In split screen mode, you can drag this view out from the left
+        // This does NOT modify the actionbar
+         val sideNavView = findViewById<NavigationView>(R.id.nav_view)
+       sideNavView?.setupWithNavController(navController)
         // TODO END STEP 9.4
     }
 
@@ -102,7 +107,7 @@ class MainActivity : AppCompatActivity() {
 //        setupActionBarWithNavController(navController, appBarConfig)
         // TODO END STEP 9.6
     }
-
+    //Inflate an Options Menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val retValue = super.onCreateOptionsMenu(menu)
         val navigationView = findViewById<NavigationView>(R.id.nav_view)
@@ -115,15 +120,19 @@ class MainActivity : AppCompatActivity() {
         return retValue
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return super.onOptionsItemSelected(item)
+    //override fun onOptionsItemSelected(item: MenuItem): Boolean {
+     //   return super.onOptionsItemSelected(item)
         // TODO STEP 9.2 - Have Navigation UI Handle the item selection - make sure to delete
         //  the old return statement above
 //        // Have the NavigationUI look for an action or destination matching the menu
 //        // item id and navigate there if found.
 //        // Otherwise, bubble up to the parent.
-//        return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
-//                || super.onOptionsItemSelected(item)
+     // return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
+        //        || super.onOptionsItemSelected(item)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
+                || super.onOptionsItemSelected(item)
+    }
         // TODO END STEP 9.2
     }
 
@@ -134,4 +143,4 @@ class MainActivity : AppCompatActivity() {
 //        return findNavController(R.id.my_nav_host_fragment).navigateUp(appBarConfiguration)
 //    }
     // TODO END STEP 9.7
-}
+//}
