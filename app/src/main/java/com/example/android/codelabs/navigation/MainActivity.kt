@@ -149,7 +149,7 @@ class MainActivity : AppCompatActivity() {
     {
         //instantiate our nav View:
 
-        val view = findViewById<NavigationView>(R.id.nav_view_header)
+        val view = findViewById<NavigationView>(R.id.nav_view)
     //    val fab = findViewById(R.id.fab) as FloatingActionButton
     //  val shopCart =   findViewById(R.id.shopping_cart)
    ///     shopCart.setOnClickListener(
