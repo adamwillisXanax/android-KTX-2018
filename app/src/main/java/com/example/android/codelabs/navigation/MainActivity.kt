@@ -21,17 +21,18 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.onNavDestinationSelected
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.*
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.navigation.NavigationView
 
 /**
@@ -53,14 +54,14 @@ class MainActivity : AppCompatActivity() {
         // Set up Action Bar
         val navController = host.navController
 
-      //  appBarConfiguration = AppBarConfiguration(navController.graph)
+       // appBarConfiguration = AppBarConfiguration(navController.graph) //REMOved!
 
         // TODO STEP 9.5 - Create an AppBarConfiguration with the correct top-level destinations
         // You should also remove the old appBarConfiguration setup above
-     val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
-       appBarConfiguration = AppBarConfiguration(
-              setOf(R.id.home_dest, R.id.deeplink_dest),
-               drawerLayout)
+        val drawerLayout : DrawerLayout? = findViewById(R.id.drawer_layout)
+        appBarConfiguration = AppBarConfiguration(
+                setOf(R.id.home_dest, R.id.deeplink_dest),
+                drawerLayout)
         // TODO END STEP 9.5
 
         setupActionBar(navController, appBarConfiguration)
@@ -68,7 +69,9 @@ class MainActivity : AppCompatActivity() {
         setupNavigationMenu(navController)
 
         setupBottomNavMenu(navController)
-
+        //added Shopping Cart
+        setupShoppingIcon(navController)
+        //end
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val dest: String = try {
                 resources.getResourceName(destination.id)
@@ -82,6 +85,17 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
+    // TODO STEP 9.2 - Have Navigation UI Handle the item selection - make sure to delete
+    //  the old return statement above
+    // Have the NavigationUI look for an action or destination matching the menu
+      override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
+                || super.onOptionsItemSelected(item)
+    }
+    // TODO END STEP 9.2
+    // }
     private fun setupBottomNavMenu(navController: NavController) {
         // TODO STEP 9.3 - Use NavigationUI to set up Bottom Nav
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav_view)
@@ -98,15 +112,8 @@ class MainActivity : AppCompatActivity() {
         // TODO END STEP 9.4
     }
 
-    private fun setupActionBar(navController: NavController,
-                               appBarConfig : AppBarConfiguration) {
-        // TODO STEP 9.6 - Have NavigationUI handle what your ActionBar displays
-//        // This allows NavigationUI to decide what label to show in the action bar
-//        // By using appBarConfig, it will also determine whether to
-//        // show the up arrow or drawer menu icon
-//        setupActionBarWithNavController(navController, appBarConfig)
-        // TODO END STEP 9.6
-    }
+
+
     //Inflate an Options Menu
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         val retValue = super.onCreateOptionsMenu(menu)
@@ -120,27 +127,57 @@ class MainActivity : AppCompatActivity() {
         return retValue
     }
 
-    //override fun onOptionsItemSelected(item: MenuItem): Boolean {
-     //   return super.onOptionsItemSelected(item)
-        // TODO STEP 9.2 - Have Navigation UI Handle the item selection - make sure to delete
-        //  the old return statement above
-//        // Have the NavigationUI look for an action or destination matching the menu
-//        // item id and navigate there if found.
-//        // Otherwise, bubble up to the parent.
-     // return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
-        //        || super.onOptionsItemSelected(item)
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
-                || super.onOptionsItemSelected(item)
+    private fun setupActionBar(navController: NavController,
+                               appBarConfig : AppBarConfiguration) {
+        // TODO STEP 9.6 - Have NavigationUI handle what your ActionBar displays
+//        // This allows NavigationUI to decide what label to show in the action bar
+//        // By using appBarConfig, it will also determine whether to
+//        // show the up arrow or drawer menu icon
+        setupActionBarWithNavController(navController, appBarConfig)
+        // TODO END STEP 9.6
     }
-        // TODO END STEP 9.2
+    // TODO STEP 9.7 - Have NavigationUI handle up behavior in the ActionBar
+    override fun onSupportNavigateUp(): Boolean {
+       // Allows NavigationUI to support proper up navigation or the drawer layout
+      // drawer menu, depending on the situation
+       return findNavController(R.id.my_nav_host_fragment).navigateUp(appBarConfiguration)
+    }
+    // TODO END STEP 9.7
+
+    private fun setupShoppingIcon(navController: NavController
+                                  )
+    {
+        //instantiate our nav View:
+
+        val view = findViewById<NavigationView>(R.id.nav_view_header)
+    //    val fab = findViewById(R.id.fab) as FloatingActionButton
+    //  val shopCart =   findViewById(R.id.shopping_cart)
+   ///     shopCart.setOnClickListener(
+    //            Navigation.createNavigateOnClickListener(R.layout.shopping_fragment, null)
+    //    )
+        view.findViewById<>(R.id.shopping_cart)?.setOnClickListener(
+
+                Navigation.createNavigateOnClickListener(R.layout.shopping_fragment,null)
+        )
+       // view.findViewById<Button>(R.id.shopping_cart)?.setOnClickListener(
+       //         Navigation.createNavigateOnClickListener(R.layout.shopping_fragment, null)
+
+    //    )
+/*
+        private val onNavigationItemSelectedListener
+                = BottomNavigationView.OnNavigationItemSelectedListener { item ->
+            when (item.I) {
+                R.id.navigation_home -> {
+                    textMessage.setText(R.string.title_home)
+                    return@OnNavigationItemSelectedListener true
+                }
+                R.id.navigation_dashboard -> {
+                    textMessage.setText(R.string.title_dashboard)
+                    return@OnNavigationItemSelectedListener true
+                }
+            }
+            false
+        }  */
     }
 
-    // TODO STEP 9.7 - Have NavigationUI handle up behavior in the ActionBar
-//    override fun onSupportNavigateUp(): Boolean {
-//        // Allows NavigationUI to support proper up navigation or the drawer layout
-//        // drawer menu, depending on the situation
-//        return findNavController(R.id.my_nav_host_fragment).navigateUp(appBarConfiguration)
-//    }
-    // TODO END STEP 9.7
-//}
+}

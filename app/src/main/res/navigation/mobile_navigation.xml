@@ -51,7 +51,11 @@
 
         <action
             android:id="@+id/next_action"
-            app:destination="@id/flow_step_two_dest">
+            app:destination="@id/flow_step_two_dest"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right">
         </action>
     </fragment>
 
@@ -88,6 +92,7 @@
         <argument
             android:name="myarg"
             android:defaultValue="Android!"/>
+        <deepLink app:uri="www.example.com/{myarg}" />
         <!-- TODO STEP 12.1 - Add a deep link to www.example.com/{myarg}/ -->
 
         <!--<deepLink app:uri="www.example.com/{myarg}" />-->

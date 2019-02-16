@@ -65,7 +65,8 @@ class HomeFragment : Fragment() {
   //          Navigation.createNavigateOnClickListener(R.id.next_action, null)
 //   )
         //TODO END STEP 7.2
-        //TODO
+        //TODO: study harder
+
 
         view.findViewById<Button>(R.id.navigate_action_button)?.setOnClickListener()
         {
