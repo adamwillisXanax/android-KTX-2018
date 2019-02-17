@@ -22,6 +22,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -70,7 +71,9 @@ class MainActivity : AppCompatActivity() {
 
         setupBottomNavMenu(navController)
         //added Shopping Cart
-        setupShoppingIcon(navController)
+
+       // setupShoppingIcon(navController)
+
         //end
         navController.addOnDestinationChangedListener { _, destination, _ ->
             val dest: String = try {
@@ -155,7 +158,7 @@ class MainActivity : AppCompatActivity() {
    ///     shopCart.setOnClickListener(
     //            Navigation.createNavigateOnClickListener(R.layout.shopping_fragment, null)
     //    )
-        view.findViewById<>(R.id.shopping_cart)?.setOnClickListener(
+        view.findViewById<ImageButton>(R.id.shopping_cart)?.setOnClickListener(
 
                 Navigation.createNavigateOnClickListener(R.layout.shopping_fragment,null)
         )
