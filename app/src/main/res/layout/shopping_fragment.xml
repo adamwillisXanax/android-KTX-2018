@@ -19,7 +19,7 @@
     tools:context=".ShoppingFragment">
 
     <TextView
-        android:id="@+id/text"
+        android:id="@+id/shopping_cart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/shopping_fragment_text"
