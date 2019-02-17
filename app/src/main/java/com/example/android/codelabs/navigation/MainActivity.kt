@@ -21,6 +21,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
@@ -154,57 +155,24 @@ class MainActivity : AppCompatActivity() {
     private fun setupShoppingIcon(navController: NavController//item: MenuItem//navController: NavController
     ) //:Boolean
     {
+        //
+    //    val fragment = ShoppingFragment.newInstance()
         //instantiate our nav View:
         val nav = findViewById<ImageButton>(R.id.shopping_cart)
         nav?.setOnClickListener {
 
-            return@setOnClickListener shoppingFra
+      //      return@setOnClickListener shoppingFra
         }
         //return item.onNavDestinationSelected(findNavController(R.id.my_nav_host_fragment))
         // val view = findViewById<NavigationView>(R.id.nav_view)
 
-        //  try {
-        //    view.findViewById<ImageButton>(R.id.shopping_cart)?.setOnClickListener(
-
-        //         Navigation.createNavigateOnClickListener(R.layout.shopping_fragment, null)
-        // )
-        //   }
-
-
-        //    val fab = findViewById(R.id.fab) as FloatingActionButton
-        //  val shopCart =   findViewById(R.id.shopping_cart)
-        ///     shopCart.setOnClickListener(
-        //            Navigation.createNavigateOnClickListener(R.layout.shopping_fragment, null)
-        //    )
-
-        // view.findViewById<Button>(R.id.shopping_cart)?.setOnClickListener(
-        //         Navigation.createNavigateOnClickListener(R.layout.shopping_fragment, null)
-
-        //    )
-
-
-/*
-        private val onNavigationItemSelectedListener
-                = BottomNavigationView.OnNavigationItemSelectedListener { item ->
-            when (item.I) {
-                R.id.navigation_home -> {
-                    textMessage.setText(R.string.title_home)
-                    return@OnNavigationItemSelectedListener true
-                }
-                R.id.navigation_dashboard -> {
-                    textMessage.setText(R.string.title_dashboard)
-                    return@OnNavigationItemSelectedListener true
-                }
-            }
-            false
-        }  */
+     //   val view: View = inflater
     }
 
     //Companion Object
-    companion object mShopFragment {
-        fun newInstance(): ShoppingFragment {
-            return ShoppingFragment()
-        }
+    companion object  {
+        fun newInstance() =ShoppingFragment()
+    //    { return ShoppingFragment() }
 
     }
 }
